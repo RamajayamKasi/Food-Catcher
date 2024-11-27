@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Food Catcher Game</title>
+	<link rel="stylesheet" href="library/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="shortcut icon" href="food_cache_icon.jpg" type="image/jpg">
+</head>
+<body>
+	<div class="setting_menu btn btn-secondary" data-open_menu="0">
+		<i class="fa-solid fa-bars"></i>
+	</div>
+	<div id="title">Food Catcher Game</div>
+		<div class="start_game_button">
+			<div class="game_controler_button">
+				<button class="btn btn-primary" id="start_normal_game">Normal</button>
+				<button class="btn btn-primary" id="start_level_game">Level</button>
+				<button class="btn btn-primary" id="game_about_btn">About</button>
+				<button class="btn btn-primary" id="game_help_btn">Help</button>
+				<button class="btn btn-primary" id="game_login">Login</button>
+				<button class="btn btn-primary" id="start_game_exit">Exit</button>
+			</div>
+		</div>
+	<div class="layeout"><div style="text-align: center;">			<img id='loading_screen' width='200' height='200' src="https://i.postimg.cc/x1674kq5/icegif-1260.gif"/>
+	  <span id="game_status">Paused</span> <br><button class="play_game  btn btn-success" disabled> <i class="fa fa-play-circle" aria-hidden="true" ></i></button></div></div>
+	<!-- https://i.postimg.cc/65NTGxJt/thief.png -->
+	<div class='text-center mt-3 game_score_button'>
+	  <button class='btn btn-success' id='score'>Score: 0</button>
+	  <button class='btn btn-danger' id='missedfood'>Missed: 0</button>
+	<button class='btn btn-primary' id='catchedthief'>Catched Thief: 0</button>
+	 </div>
+		<div id='container' class="mt-2">
+			<div id="gameArea">
+				<div class="ball" point="1" sub_id="ball1">
+					<img id="ball1" src="https://i.postimg.cc/VvsfDmYC/orange.png" width="50"  height="50" alt="" srcset=""/>	
+					<span>+1</span>
+				</div>
+				<div class="ball" point="2" sub_id="ball2">
+					<img id="ball2" src="https://i.postimg.cc/bNjHY5m2/Apple.png" width="50" point="3" height="50" alt="" srcset="">
+					<span>+2</span>
+				</div>
+				<div class="ball" point="3" sub_id="ball3">
+					<img id="ball3" src="https://i.postimg.cc/QtfGN53F/Strawberry.png" width="50" point="5" height="70" alt="" srcset="">
+					<span>+3</span>
+				</div>
+				<div class="catch_container ball big" point="5" sub_id="ball4">
+					<img id="ball4" src="https://i.postimg.cc/65NTGxJt/thief.png" alt="" point="5" srcset=""width="80" height="80">
+					<span>-5</span>
+				</div>
+				<img src="https://i.postimg.cc/RVqpfycp/fruit-catcher.png" width="90" height="90"
+					id="catcher"/>
+			</div>
+		</div>
+	<div class="contoler_button mb-4">
+		<div class="button_container">
+			<button class="pause_game btn btn-primary" style="display:none;"> <i  class="fa fa-pause-circle" aria-hidden="true"></i></button>
+			<button class="move_left btn btn-secondary"><i class="fa fa-caret-left"  aria-hidden="true"></i></button>
+			<button class="move_right btn btn-secondary"><i class="fa fa-caret-right"  aria-hidden="true"></i></button>
+		</div>
+	</div>
+	
+	<div class="menu_fields">
+		<div class="menu_container">
+			<div class="icon_center text-center" style="display: flex;justify-content: center;">
+				<p id="user_icon">RK</p>
+			</div>
+			<p id="user_name">Ramajayam K</p>
+			<p id="user_email">ramr65007@gmail.com</p>
+			<div class="game_level_list">
+				<hr>
+				<p>Game Level</p>
+				<span id="level_1">1</span>
+				<span id="level_2">2</span>
+				<span id="level_3">3</span>
+				<span id="level_4">4</span>
+				<span id="level_5">5</span>
+				<br><br>
+				<span id="level_6">6</span>
+				<span id="level_7">7</span>
+				<span id="level_8">8</span>
+				<span id="level_9">9</span>
+				<span id="level_10">10</span>
+			</div>
+			<hr>
+			<p>Feed Back</p>
+			<p style="font-size: 12px;" id="user_feedback_view">Give your valuable feedback.</p>
+			<hr>
+				<div class="rating-box">
+				<header>Share your rating</header>
+			  <div class="emoji_icon" style="font-size:30px;text-align:center;"></div>
+				<div class="stars">
+				  <i id='1' class="fa-solid fa-star removeActive"></i>
+				  <i id='2' class="fa-solid fa-star removeActive"></i>
+				  <i id='3' class="fa-solid fa-star removeActive"></i>
+				  <i id='4' class="fa-solid fa-star removeActive"></i>
+				  <i id='5' class="fa-solid fa-star removeActive"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<audio id="game_sound" controls loop style="display:none">
+		<source src="https://github.com/19cs219Ramajayam/StopWatch/raw/main/game_play_music.mp3" type="audio/mp3">
+		Your browser does not support the audio element.
+	</audio>
+	<div class="game_help_container">
+		<div class="game_rules">
+		<h3 style="text-align:center;">Logged</h3>
+		<ol>
+		  <li>If you are logged in to this game.</li>
+		  <li>In a normal game,you can view the scoreboard; otherwise, it will not be visible to you in normal game.</li>
+		  <li>Save the level to play later.</li>
+		  </ol>
+			<h3 style="text-align:center;">Game Rule</h3>
+			<h5>Normal :</h5>
+			<ol>
+				<li>It is a normal game with no levels. In the game, if you catch the thief three times and miss 20 foods, the game will be over.</li>
+				<li>If you are logged in to this game.</li>
+		  <li>You can view the scoreboard; otherwise, it will not be visible to you in normal.</li>
+		  <li>Save the level to play later.
+			</ol>
+			<h5>Level (10) :</h5>
+			<ol>
+				<li>Your goal is to reach a score of 100 without catching the thief more than five times.</li>
+				<li>Your goal is to reach a score of 200 without catching the thief more than four times and without missing more than 50 foods.</li>
+				<li>Your goal is to reach a score of 300 without catching the thief more than three times and without missing more than 60 foods.</li>
+				<li>Your goal is to reach a score of 400 without catching the thief more than two times and without missing more than 70 foods.</li>
+				<li>Your goal is to reach a score of 500 without catching the thief more than one times and without missing more than 100 foods.</li>
+				<li>Your goal is to reach a score of 600 without catching the thief more than one times and without missing more than 150 foods.</li>
+				<li>Your goal is to reach a score of 700 without catching the thief more than one times and without missing more than 190 foods.</li>
+				<li>Your goal is to reach a score of 800 without catching the thief more than one times and without missing more than 220 foods.</li>
+				<li>Your goal is to reach a score of 900 without catching the thief more than one times and without missing more than 250 foods.</li>
+				<li>Your goal is to reach a score of 1000 without catching the thief more than one times and without missing more than 290 foods.</li>
+			</ol>
+		</div>
+		<button class="btn btn-info" id="Back_home_page">Back</button>
+	  
+	<button class="btn btn-info" id="Back_play_page">Play Now</button>
+	</div>
+	<div>
+	 <div class="game_about_container">
+		<div class="game_abouts">
+		<h4>Welcome to Food Catcher Game!</h4>
+		<p>This game is proudly developed by Ramajayam, a skilled software developer with one year of valuable work experience. With a passion for crafting engaging and entertaining experiences, Ramajayam has dedicated expertise to ensure that Food Catcher Game delivers the best possible gaming enjoyment to our players.</p>
+	
+		<h5>About Us:</h5>
+		<p>Food Catcher Game is not just a game; it's a delightful experience that brings joy and entertainment to players of all ages. Our team of passionate developers came together with a shared love for gaming and a mission to create a fun and engaging mobile game that will leave you craving for more!</p>
+	
+	
+		<h5>The Concept:</h5>
+		<p>Imagine a world where delicious treats are falling from the sky, and your mission is to catch them all! Food Catcher Game combines the excitement of a classic arcade game with the mouth-watering allure of your favorite snacks. It's not just about scoring points; it's about indulging in a feast of virtual delights while testing your reflexes and skills.</p>
+	
+		<h5>Key Features:</h5>
+	<ol>
+		<li>Intuitive controls: Left and right arrow buttons your way to victory!</li>
+		<li>Variety of delicious treats: Snacks, catch them all!</li>
+		<li>Power-ups and challenges: Spice up the game with special abilities and obstacles.</li>
+		<li>Global leaderboards: Compete with players worldwide and become the ultimate Food Catcher champion!</li>
+	</ol>
+	<h5>Join the Food Catcher Community:</h5>
+	<p>Connect with us on social media to stay updated on the latest game developments, challenges, and exciting events. Share your high scores, favorite food combos, and feedback with fellow Food Catcher enthusiasts!</p>
+	<div class="social_media">
+		<a  href="https://wa.me/+918778405446" target="_blank"><i class="fa-brands fa-square-whatsapp"></i></a>
+		<a  href="https://www.facebook.com/profile.php?id=100058897973787" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
+		<a  href="https://www.instagram.com/ramajayam411/" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
+		<a href="https://www.linkedin.com/in/ramajayam-k-18736320b/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+		<a  href="https://twitter.com/JaganKasiSon" target="_blank"><i class="fa-brands fa-square-twitter"></i></a>
+		<a  href="https://web.telegram.org/k/" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+	</div>
+	
+	</div>
+	<button class="btn btn-info" id="Back_home_page">Back</button>
+	
+	<button class="btn btn-info" id="Back_play_page">Play Now</button>
+	</div>
+</body>
+<script src="library/jquery.js"></script>
+<script src="library/swal.js"></script>
+<script src="library/fontawesome/js/all.js"></script>
+<script src="library/bootstrap.min.js"></script>
+<script type="module" src="script.js"></script>
+</html>
